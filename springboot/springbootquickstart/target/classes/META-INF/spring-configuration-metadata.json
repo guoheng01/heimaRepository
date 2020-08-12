@@ -1,0 +1,11 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.itheima.controller.QuickStartController",
+      "name": "person",
+      "type": "com.itheima.controller.QuickStartController"
+    }
+  ],
+  "properties": []
+}
