@@ -3,6 +3,7 @@ package cn.itcast.crawler.test;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -36,6 +37,13 @@ public class HttpPostParamTest {
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(phccm).build();
         //2.输入请求地址 https://www.runoob.com/?s=java
         HttpPost httpPost = new HttpPost("https://www.runoob.com/");
+        //9.设置请求参数
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(1000)//设置最长连接时间单位都是毫秒
+                .setConnectionRequestTimeout(1000)//设置获取连接的最长时间
+                .setSocketTimeout(10 * 1000)//设置数据传输的最长时间
+                .build();
+        httpPost.setConfig(requestConfig);
         //3.List集合封装表单请求参数
         ArrayList<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("s","java"));

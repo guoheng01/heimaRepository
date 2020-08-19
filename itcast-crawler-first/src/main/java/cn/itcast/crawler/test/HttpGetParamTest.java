@@ -3,6 +3,7 @@ package cn.itcast.crawler.test;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
@@ -49,6 +50,13 @@ public class HttpGetParamTest {
                     .build();
             //4.创建get对象
             HttpGet httpGet = new HttpGet(String.valueOf(uriBuilder));
+            //10.设置请求参数
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectTimeout(1000)//设置最长连接时间单位都是毫秒
+                    .setConnectionRequestTimeout(1000)//设置获取连接的最长时间
+                    .setSocketTimeout(10 * 1000)//设置数据传输的最长时间
+                    .build();
+            httpGet.setConfig(requestConfig);
             //5.使用客户端对象发起请求
             response = httpClient.execute(httpGet);
             //6.解析返回对象
